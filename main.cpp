@@ -27,11 +27,13 @@ int init(){
             map[i][i2]=0;
         }
     }*/
-    //上記とほぼ同じ
+    //上記の意味とほぼ同じ
     memset(map,0,sizeof(map));
+    //ランダム用
     for(int i=0;i<NUM;i++){
          //map[rand()%HEIGHT][rand()%WIDTH]=1;
     }
+    //ペンタデカスロン
     map[5][5]=1;
     map[6][5]=1;
     map[7][5]=1;
@@ -42,26 +44,28 @@ int init(){
     map[7][10]=1;
     map[6][11]=1;
 }
-int check(){
+
+//一周期をチェック
+void check(){
+    //次の周期のmapを用意
     int nextMap[HEIGHT][WIDTH];
+    //現在の周期から次の周期にコピーする
     memcpy(nextMap,map,sizeof(map));
+    //WIDTH * HEIGHTですべてのマスを調べる
     for(int y=0;y<HEIGHT;y++){
         for(int x=0;x<WIDTH;x++){
+            //八方向にある生物をカウントする
             int count=0;
             for(int i3=0;i3<8;i3++){
                 if(y+dy[i3]>=0&&y+dy[i3]<HEIGHT && x+dx[i3]>=0 && x + dx[i3]<WIDTH){
+                    //もし生きていた場合
                     if(map[y+dy[i3]][x+dx[i3]]){
                         count++;
                     }
                 }
+                //八方向にある生物の状態から現在のマスの判定を行う
                 switch (count)
                 {
-                    case 0:
-                        nextMap[y][x]=0;
-                    case 1:
-                        nextMap[y][x]=0;
-                        /* code */
-                        break;
                     case 2:
                         if(map[y][x]){
                             nextMap[y][x]=1;
@@ -77,11 +81,13 @@ int check(){
             }
         }
     }
-     memcpy(map,nextMap,sizeof(nextMap));
+    //次の世代のmapを現在のmapにコピーする
+    memcpy(map,nextMap,sizeof(nextMap));
 }
 
 //フィールド表示
-int print(){
+void print(){
+    //エスケープシーケンス 
     printf("\e[2\e[2J");
     for(int i=0;i<HEIGHT;i++){
         printf("|");
@@ -101,13 +107,14 @@ int print(){
 
 int main()
 {
-
-    int count=0;
+    //擬似乱数の発生系列を変更
     srand((unsigned)time(NULL));
+    //初期化
     init();
-    while(1){
 
+    while(1){
         print();
+        //待機
         usleep(500000);
         check();
     }
