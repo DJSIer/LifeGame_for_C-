@@ -47,6 +47,11 @@ int main()
             int count=0;
             int x=i2;
             int y=i;
+            //八方向を調べる
+            //x+dx[0],y+dy[0]でmap[y+0][x+1]つまり右横
+            //x+dx[1],y+dy[1]でmap[y+0][x-1]つまり左横
+            //・・・
+            //x+dx[7],y+dy[7]でmap[y+1][x-1]左下斜め
             for(int i3=0;i3<8;i3++){
                 if(x + dx[i3] >=0 && x + dx[i3]<WIDTH){
                     if(y + dy[i3] >= 0 && y + dy[i3] <HEIGHT){
