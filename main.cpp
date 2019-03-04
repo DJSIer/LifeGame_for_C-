@@ -1,11 +1,10 @@
-#include<iostream>
+
 #include<stdio.h>
 #include<memory.h>
 #include<unistd.h>
 #include<stdlib.h>
 #include<time.h>
 
-using namespace std;
 
 //横の長さ
 const int WIDTH=16;
@@ -34,7 +33,7 @@ int init(){
          //map[rand()%HEIGHT][rand()%WIDTH]=1;
     }
     //ペンタデカスロン
-    map[5][5]=1;
+    /*map[5][5]=1;
     map[6][5]=1;
     map[7][5]=1;
     map[6][4]=1;
@@ -43,6 +42,7 @@ int init(){
     map[6][10]=1;
     map[7][10]=1;
     map[6][11]=1;
+    */
 }
 
 //一周期をチェック
@@ -73,7 +73,7 @@ void check(){
                         break;
                     case 3:
                         nextMap[y][x]=1;
-                        break;         
+                        break;
                     default:
                         nextMap[y][x]=0;
                         break;
