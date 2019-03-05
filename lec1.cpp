@@ -12,8 +12,11 @@ int map[HEIGHT][WIDTH];
 
 int main()
 {
+ 
     //sizeof(int)=4 16*16*4=1024
     memset(map,0,sizeof(map));
+    
+    map[10][10]=1;
     //エスケープシーケンス 
     printf("\e[2\e[2J");
     for(int i=0;i<HEIGHT;i++){

@@ -25,6 +25,9 @@ int main()
 
     //適当なマスに生存を設置
     map[2][1]=1;
+    map[2][2]=1;
+    map[2][3]=1;
+    //map[3][2]=1;
 
     //エスケープシーケンス 
     printf("\e[2\e[2J");
@@ -70,9 +73,39 @@ int main()
         }
     }
     for(int i=0;i<HEIGHT;i++){
+        for(int i2=0;i2<WIDTH;i2++){
+            if(counterMap[i][i2]<=1){
+                map[i][i2]=0;
+            }
+            if(map[i][i2]==0 && counterMap[i][i2]==3){
+                map[i][i2]=1;
+            }
+            if(counterMap[i][i2]>=4){
+                map[i][i2]=0;
+            }
+        }
+    }
+
+    for(int i=0;i<HEIGHT;i++){
         printf("|");
         for(int i2=0;i2<WIDTH;i2++){
             printf("%d",counterMap[i][i2]);
+            printf("|");
+        }
+        printf("\n");
+    }
+        //エスケープシーケンス 
+    //printf("\e[2\e[2J");
+    for(int i=0;i<HEIGHT;i++){
+        printf("|");
+        for(int i2=0;i2<WIDTH;i2++){
+
+            if(map[i][i2]){
+                printf("■");
+            }
+            else{
+                printf("□");
+            }
             printf("|");
         }
         printf("\n");
